@@ -4,8 +4,17 @@
 
 		session_start();
 
-		if ( isset($_POST['intro'])) {
-			autenticar(isset($_POST['empleado']),$_POST['id'],$_POST['pass']);
+		if (isset($_POST['intro']) && autenticar($_POST['id'],$_POST['pass'])) {
+			echo "ENTRADO <br>";
+			// Insertar include
+			// Añadir verificacion empleado
+			if(!empty($_POST['empleado'])){
+				include "menuEmpleado.php";
+			}
+
+		} else if(isset($_POST['intro'])) {
+			echo "Usuario o contraseña incorrecta<br>";
+			echo "<a href='index.php'>Volver</a>";
 		} else {
 
 	?>

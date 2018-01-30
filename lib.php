@@ -1,22 +1,14 @@
 <?php
 	/**
 	 * Comprueba un usuario y contraseña
-	 * @param empleado Boolean; si es empleado o no
-	 * @param id Integer; Id del usuario
-	 * @param pass String; Contraseña del usuario
+	 * @param empleado Boolean - si es empleado o no
+	 * @param id Integer - Id del usuario
+	 * @param pass String - Contraseña del usuario
 	 */
-	//cnx == condexion de la BDD
-	function autenticar($empleado,$id,$pass){
+	function autenticar($id,$pass){
 		$cnx = start_conection("localhost","root","","videoclub");
 
-		if ($empleado) {
-			echo "Es empleado<br>";
-			$q = "SELECT * FROM usuario WHERE id_usuario = $id;";
-		}	else {
-			echo "No es empleado<br>";
-			$q = "SELECT * FROM usuario WHERE id_usuario = $id;";
-		}
-
+		$q = "SELECT * FROM usuario WHERE id_usuario = $id;";
 
 		if ($resultado = $cnx -> query($q)){
 			if ($resultado -> num_rows === 0){
@@ -24,7 +16,6 @@
 				return FALSE;
 			} else {
 				$arr = $resultado -> fetch_assoc();
-				echo "<br>".$arr['pass']."<br>";
 				if ($arr['pass'] == $pass){
 					return TRUE;
 				} else {
@@ -35,6 +26,8 @@
 		} else {
 			echo "Error";
 		}
+
+		$cnx -> close();
 	}
 
 	function start_conection($ip,$usuario,$pass,$bdd){
