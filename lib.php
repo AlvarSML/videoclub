@@ -2,4 +2,5 @@
 	function test(){
 		echo "TEST";
 	}
+
 ?>
