@@ -1,4 +1,5 @@
 <?php
+	//cnx == condexion de la BDD
 	function autenticar($cnx,$empleado,$id,$pass){
 		if ($empleado) {
 			$q = "SELECT * FROM empleado WHERE id_usuario = $id;";
@@ -6,11 +7,9 @@
 			$q = "SELECT * FROM socio WHERE id_usuario = $id;";
 		}
 
-		if($resultado = $cnx -> query($q)){
+		if ($resultado = $cnx -> query($q)){
 			
-		}
-
-		
+		}		
 	}
 
 	function start_conection($ip,$usuario,$pass,$bdd){
@@ -22,4 +21,5 @@
 
 		return $mysqli;
 	}
+
 ?>

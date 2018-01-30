@@ -12,13 +12,16 @@
 		}
 	?>
 
-	<form action="" method="post">
+	<form action="index.php" method="post">
 		<p>ID Usuario: </p>
 		<input type="text" name="usuario">
 		<p>Contraseña: </p>
 		<input type="password" name="pass"><br>
 		<input type="checkbox" name="empleado"> Empleado <br>
 		<input type="submit" name="intro" value="Intro">
+		
+	</form>
+	<form action="registro.php">
 		<input type="submit" name="reg" value="Registro">
 	</form>
 
