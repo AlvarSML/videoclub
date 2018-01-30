@@ -4,13 +4,30 @@
 		$cnx = start_conection("localhost","root","","videoclub");
 
 		if ($empleado) {
-			$q = "SELECT * FROM empleado WHERE id_usuario = $id;";
+			echo "Es empleado<br>";
+			$q = "SELECT * FROM usuario WHERE id_usuario = $id;";
 		}	else {
-			$q = "SELECT * FROM socio WHERE id_usuario = $id;";
+			echo "no es empleado<br>";
+			$q = "SELECT * FROM usuario WHERE id_usuario = $id;";
 		}
 
+
 		if ($resultado = $cnx -> query($q)){
-			
+			if ($resultado -> num_rows === 0){
+				echo "No Existe el usuario";
+				return FALSE;
+			} else {
+				$arr = $resultado -> fetch_assoc();
+				echo "<br>".$arr['pass']."<br>";
+				if ($arr['pass'] == $pass){
+					return TRUE;
+				} else {
+					echo "contraseña icorrecta";
+					return FALSE;
+				}
+			}
+		} else {
+			echo "Error";
 		}
 	}
 
