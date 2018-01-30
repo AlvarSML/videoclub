@@ -1,4 +1,10 @@
 <?php
+	/**
+	 * Comprueba un usuario y contraseña
+	 * @param empleado Boolean; si es empleado o no
+	 * @param id Integer; Id del usuario
+	 * @param pass String; Contraseña del usuario
+	 */
 	//cnx == condexion de la BDD
 	function autenticar($empleado,$id,$pass){
 		$cnx = start_conection("localhost","root","","videoclub");
@@ -7,7 +13,7 @@
 			echo "Es empleado<br>";
 			$q = "SELECT * FROM usuario WHERE id_usuario = $id;";
 		}	else {
-			echo "no es empleado<br>";
+			echo "No es empleado<br>";
 			$q = "SELECT * FROM usuario WHERE id_usuario = $id;";
 		}
 
