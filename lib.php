@@ -1,6 +1,8 @@
 <?php
 	//cnx == condexion de la BDD
-	function autenticar($cnx,$empleado,$id,$pass){
+	function autenticar($empleado,$id,$pass){
+		$cnx = start_conection("localhost","root","","videoclub");
+
 		if ($empleado) {
 			$q = "SELECT * FROM empleado WHERE id_usuario = $id;";
 		}	else {
@@ -9,7 +11,7 @@
 
 		if ($resultado = $cnx -> query($q)){
 			
-		}		
+		}
 	}
 
 	function start_conection($ip,$usuario,$pass,$bdd){
