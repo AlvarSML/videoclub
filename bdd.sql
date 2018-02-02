@@ -62,3 +62,6 @@ CREATE TABLE disco (
 	autor varchar(70) NOT NULL,
 	FOREIGN KEY (id_prestamo) REFERENCES prestamo(id_prestamo) 
 );
+
+INSERT INTO permisos VALUES (0,'socio'),(0,'empleado'),(0,'jefe');
+INSERT INTO usuario VALUES (0,'123','socio','socio',1),(0,'123','empleado','empleado',2);

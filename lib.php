@@ -25,7 +25,7 @@ function nuevoUsuario( $nombre, $clave, $apellidos) {
     if ($conexion->error) {
         if($conexion->errno == 1062){
             echo "Porfavor introduzca otro nombre de usuario,ese ya existe.";
-        }
+    	}
         //echo "Mensaje de error y codigo de error ", $conexion->error, $conexion->errno;
         return $conexion -> error;
     }
@@ -40,46 +40,47 @@ function nuevoUsuario( $nombre, $clave, $apellidos) {
     //$resultado3 = $conexion->query($sql3) or die("ERROR al insertar en usuarios_roles");
 }
 
-	/**
-	 * Comprueba un usuario y contraseña
-	 * @param empleado Boolean - si es empleado o no
-	 * @param id Integer - Id del usuario
-	 * @param pass String - Contraseña del usuario
-	 */
-	function autenticar($id,$pass){
-		$cnx = start_conection("localhost","root","","videoclub");
+/**
+ * Comprueba un usuario y contraseña
+ * @param empleado Boolean - si es empleado o no
+ * @param id Integer - Id del usuario
+ * @param pass String - Contraseña del usuario
+ */
+function autenticar($id,$pass){
+	$cnx = start_conection("localhost","root","","videoclub");
 
-		$q = "SELECT * FROM usuario WHERE id_usuario = $id;";
+	$q = "SELECT * FROM usuario WHERE id_usuario = $id;";
 
-		if ($resultado = $cnx -> query($q)){
-			if ($resultado -> num_rows === 0){
-				echo "No Existe el usuario";
-				return FALSE;
-			} else {
-				$arr = $resultado -> fetch_assoc();
-				if ($arr['pass'] == $pass){
-					return TRUE;
-				} else {
-					echo "contraseña icorrecta";
-					return FALSE;
-				}
-			}
+	if ($resultado = $cnx -> query($q)){
+		if ($resultado -> num_rows === 0){
+			echo "No Existe el usuario";
+			return FALSE;
 		} else {
-			echo "Error";
+			$arr = $resultado -> fetch_assoc();
+			if ($arr['pass'] == $pass){
+				return TRUE;
+			} else {
+				echo "contraseña icorrecta";
+				echo $q;
+				return FALSE;
+			}
 		}
-
-		$cnx -> close();
+	} else {
+		echo "Error";
 	}
 
-	function start_conection($ip,$usuario,$pass,$bdd){
-		$mysqli = new mysqli($ip, $usuario, $pass, $bdd);
+	$cnx -> close();
+}
 
-		if ($mysqli->connect_errno) {
-    	echo "Falló la conexión con MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-		}
+function start_conection($ip,$usuario,$pass,$bdd){
+	$mysqli = new mysqli($ip, $usuario, $pass, $bdd);
 
-		return $mysqli;
+	if ($mysqli->connect_errno) {
+	echo "Falló la conexión con MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 	}
+
+	return $mysqli;
+}
 
 
 ?>
