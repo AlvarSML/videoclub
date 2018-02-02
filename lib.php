@@ -23,13 +23,14 @@ function registro(){
     <input type="text" name="apellidos"><br>
     <p>Contraseña: </p>
     <input type="password" name="pass"><br>
-    <input type="checkbox" name="empleado"> Empleado <br>
     <input type="submit" name="nuevo_usuario" value="ACEPTAR">
 </form>
 <?php
 }
 //incluir y cerrar conexion
-function nuevoUsuario($conexion, $nombre, $clave, $apellidos) {
+function nuevoUsuario( $nombre, $clave, $apellidos) {
+	$conexion = start_conection("localhost","root","","videoclub");
+
     /* $sql = "select * from usuarios where USUARIO='$nombre'";
       if ($resultado->num_rows == 0) { */
     $sql1 = "insert into usuario(pass,nombre,apellidos) values('$clave','$nombre','$apellidos')";
@@ -45,10 +46,18 @@ function nuevoUsuario($conexion, $nombre, $clave, $apellidos) {
     $resultado2 = $conexion->query($sql2);
     if ($resultado2->num_rows > 0) {
         $row = $resultado2->fetch_assoc();
+<<<<<<< HEAD
         $id = $row['id_usuario'];
     }
     $sql3 = "insert into socio(id_usuario) values($id)";
     $resultado3 = $conexion->query($sql3) or die("ERROR al insertar en empleados");
+=======
+        $id = $row['ID_USUARIO'];
+	}
+	
+    //$sql3 = "insert into usuarios_roles(ID_USUARIO,ID_ROL) values($id,1)";
+    //$resultado3 = $conexion->query($sql3) or die("ERROR al insertar en usuarios_roles");
+>>>>>>> 8cdc1f4380749b7cb34b3e2b3abf1c42485e9b01
 }
 /**
 	 * Comprueba un usuario y contraseña
