@@ -1,10 +1,10 @@
-
+DROP TABLE IF EXISTS video;
+DROP TABLE IF EXISTS disco;
 DROP TABLE IF EXISTS prestamo;
 DROP TABLE IF EXISTS empleado;
 DROP TABLE IF EXISTS usuario;
 DROP TABLE IF EXISTS permisos;
-DROP TABLE IF EXISTS video;
-DROP TABLE IF EXISTS disco;
+
 DROP TABLE IF EXISTS socio;
 
 
@@ -17,7 +17,7 @@ CREATE TABLE permisos (
 CREATE TABLE usuario (
 	id_usuario int(5) PRIMARY KEY AUTO_INCREMENT,
 	pass varchar(100) /*WIP SHA?*/,
-	nombre varchar(25) NOT NULL,
+	nombre varchar(25) NOT NULL UNIQUE,
 	apellidos varchar(50) NOT NULL,
 	permiso int(2) NOT NULL,
 	FOREIGN KEY (permiso) REFERENCES permisos(id_permiso)
