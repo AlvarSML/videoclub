@@ -2,13 +2,17 @@
 include "header.php"; 
 include "lib.php";
 session_start();
-if (isset($_POST['intro']) && autenticar($_POST['nombre'],$_POST['pass'])) {
+
+
+
+if ((isset($_POST['intro']) && $auth = autenticar($_POST['nombre'],$_POST['pass'])) || isset($_SESSION['user']) ) {
     echo "ENTRADO <br>";
-    // Insertar include
-    // Añadir verificacion empleado
-    if(!empty($_POST['empleado'])){
-        include "menuEmpleado.php";
+
+    if($auth && !isset($_SESSION['user'])) {
+        $_SESSION['user'] = $_POST['nombre'];
     }
+
+    include "menuEmpleado.php";
 } else if(isset($_POST['intro'])) {
     echo "Usuario o contraseña incorrecta<br>";
     echo "<a href='index.php'>Volver</a>";
