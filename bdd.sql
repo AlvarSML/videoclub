@@ -4,10 +4,7 @@ DROP TABLE IF EXISTS prestamo;
 DROP TABLE IF EXISTS empleado;
 DROP TABLE IF EXISTS usuario;
 DROP TABLE IF EXISTS permisos;
-
 DROP TABLE IF EXISTS socio;
-
-
 
 CREATE TABLE permisos (
 	id_permiso int(2) PRIMARY KEY AUTO_INCREMENT,
@@ -51,14 +48,16 @@ CREATE TABLE prestamo (
 
 CREATE TABLE video (
 	id_video int(5) PRIMARY KEY AUTO_INCREMENT,
-	id_prestamo int(5) ,
+	id_prestamo int(5),
+	nombre_video varchar(50) NOT NULL,
 	protagonista varchar(70),
 	FOREIGN KEY (id_prestamo) REFERENCES prestamo(id_prestamo)
 );
 
 CREATE TABLE disco (
 	id_disco int(5) PRIMARY KEY AUTO_INCREMENT,
-	id_prestamo int(5) ,
+	id_prestamo int(5),
+	nombre_disco varchar(25) NOT NULL,
 	autor varchar(70) NOT NULL,
 	FOREIGN KEY (id_prestamo) REFERENCES prestamo(id_prestamo) 
 );
