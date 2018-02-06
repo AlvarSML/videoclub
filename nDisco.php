@@ -4,6 +4,3 @@
   <input type="submit" name="ndisco" value="Intro">
 </form>
 <a href="index.php">Volver</a>
-<?php
-  echo verTabla('disco',['id_disco','nombre_disco','autor']);
-?>
