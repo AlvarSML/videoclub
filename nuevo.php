@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * En este archivo se gestiona la creacion de Discos y videos
+ */
+
 include "header.php"; 
 include "lib.php";
 session_start();
@@ -30,6 +35,9 @@ if (isset($_POST['disc']) || isset($_POST['ndisco']) || isset($_POST['deldisc'])
   echo verTabla('video',['id_video','nombre_video','protagonista']);
 
   include "delVideo.php";
+} else if(isset($_POST['exit'])) {
+  session_destroy();
+  echo "<a href='index.php'>Volver a Inicio</a>";
 } else {
   echo "Error";
   print_r($_POST);

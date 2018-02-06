@@ -101,29 +101,9 @@ function start_conection($ip,$usuario,$pass,$bdd){
 /**
  * crea un registro de video
  * @param nombre
- * @param prota
+ * @param autor
  * 
  * TODO: se puede simplificar
- */
-function introVideo($nombre,$prota){
-    $conexion = start_conection("localhost","root","","videoclub");
-
-    $insert = "INSERT INTO video VALUES (0,NULL'$nombre','$prota');";
-
-    if($conexion->query($insert)){
-        echo "Inser correcto";
-    } else {
-        echo "Error de insert";
-    }
-
-    $conexion -> close();
-    
-}
-
-/**
- * crea un registro de video
- * @param nombre
- * @param autor 
  */
 function introDisco($nombre,$autor){
 
