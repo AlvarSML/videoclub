@@ -101,7 +101,9 @@ function start_conection($ip,$usuario,$pass,$bdd){
 /**
  * crea un registro de video
  * @param nombre
- * @param prota 
+ * @param prota
+ * 
+ * TODO: se puede simplificar
  */
 function introVideo($nombre,$prota){
     $conexion = start_conection("localhost","root","","videoclub");
@@ -181,6 +183,55 @@ function verTabla($tabla,$campos){
         echo "Select en $tabla fallido";
     }
 
+    $conexion -> close();
     return "<table border='1'>$titulos $filas</table>";
 }
+
+/**
+ * Elimina uno o varios registros
+ * 
+ * @param string $tabla - tabla de la que se elimina
+ * @param string $campo - campo de referencia para comparar
+ * @param string $valor . valor a comparar con el campo
+ * 
+ * EJ.: DELETE FROM $tabla WHERE $campo = $valor
+ * 
+ * 
+ */
+function delRow($tabla,$campo,$valor){
+    $conexion = start_conection("localhost","root","","videoclub");
+
+    if (gettype($valor) == "string") $valor = "'$valor'";
+
+    $q = "DELETE FROM $tabla WHERE $campo = $valor;";
+
+    $res = $conexion -> query($q);
+
+    $conexion -> close();
+    return $res;
+
+}
+
+/**
+ * Hace un insert en una tabla seleccionando los campos a usar
+ * @param string $tabla - tabla de la query
+ * @param string[] $campos -  campos a insertar
+ * @param string[] $valores - valores a insertar, los literales tienen que llevar comillas simples
+ */
+function genericInsert($tabla,$campos,$valores){
+
+    $campos = "(".implode(",",$campos).")";
+    $valores = "(".implode(",",$valores).")";
+
+    $conexion = start_conection("localhost","root","","videoclub");
+    $q = "INSERT INTO $tabla $campos VALUES $valores;";
+    echo "<br> $q <br>";
+
+    $res = $conexion -> query($q);
+
+    $conexion -> close();
+    return $res;
+
+}
+
 ?>
