@@ -185,7 +185,11 @@ function delRow($tabla,$campo,$valor){
 
     $q = "DELETE FROM $tabla WHERE $campo = $valor;";
 
-    $res = $conexion -> query($q);
+    if($res = $conexion -> query($q)){
+
+    } else {
+        echo $q;
+    }
 
     $conexion -> close();
     return $res;
@@ -205,13 +209,29 @@ function genericInsert($tabla,$campos,$valores){
 
     $conexion = start_conection("localhost","root","","videoclub");
     $q = "INSERT INTO $tabla $campos VALUES $valores;";
-    echo "<br> $q <br>";
 
     $res = $conexion -> query($q);
 
     $conexion -> close();
     return $res;
-
 }
+
+/**
+ * COMENTAR
+ */
+
+function getPriv($user){
+    $conexion = start_conection("localhost","root","","videoclub");
+
+    $q = "SELECT permiso FROM usuario WHERE nombre = '$user';";
+
+    if ($resultado = $conexion -> query($q)) {
+        return $resultado -> fetch_assoc()['permiso'];
+    } else {
+        return -1;
+    }
+}
+
+
 
 ?>

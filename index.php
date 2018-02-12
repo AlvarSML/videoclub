@@ -10,6 +10,7 @@ if ((isset($_POST['intro']) && $auth = autenticar($_POST['nombre'],$_POST['pass'
 
     if($auth && !isset($_SESSION['user'])) {
         $_SESSION['user'] = $_POST['nombre'];
+        $_SESSION['pass'] = $_POST['pass'];
     }
 
     include "menuEmpleado.php";

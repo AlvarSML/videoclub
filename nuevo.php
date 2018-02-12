@@ -35,11 +35,14 @@ if (isset($_POST['disc']) || isset($_POST['ndisco']) || isset($_POST['deldisc'])
   echo verTabla('video',['id_video','nombre_video','protagonista']);
 
   include "delVideo.php";
+} else if(isset($_POST['nemp']) || isset($_POST['nuemp']) || isset($_POST['delemp'])) {
+  include "nEmp.php";
+
 } else if(isset($_POST['exit'])) {
   session_destroy();
   echo "<a href='index.php'>Volver a Inicio</a>";
 } else {
-  echo "Error";
+  echo "Error => ";
   print_r($_POST);
 }
 
