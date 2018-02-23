@@ -8,7 +8,6 @@ function formularioInicial(){
     <input type="text" name="nombre">
     <p>Contraseña: </p>
     <input type="password" name="pass"><br>
-    <input type="checkbox" name="empleado"> Empleado <br>
     <input type="submit" name="intro" value="Intro">
 </form>
 <form action="registro.php">
@@ -16,6 +15,7 @@ function formularioInicial(){
 </form>
 <?php
 }
+
 function registro(){
 ?>
 <form action="registro.php" method="post">
@@ -246,15 +246,31 @@ function genericQuery($query){
     }
 }
 
-function genAlquileres($resultado){
+/**
+ * 
+ */
+function getAlquileres($usuario){
+    $conexion = start_conection("localhost","root","","videoclub");
 
-    while ($i = $resultado -> fetch_assoc()) {
-        
+    $query = "SELECT * FROM prestamo WHERE socio = (SELECT id_usuario FROM usuario WHERE nombre = '$usuario');";
+
+    $filas = "<tr><th>ID</th><th>Empleado</th><th>Socio</th><th>Fecha</th><th>Duracion</th><th>Fin</th></tr>";
+
+    if($res = $conexion -> query($query)){
+        while ($row = $res -> fetch_array(MYSQLI_NUM)) {
+            $filas .= "<tr>";
+            for ($i = 0; $i <= count($row) -1; $i ++) {
+                $filas .= "<td>$row[$i]</td>";
+            }
+            $filas .= "</td>";
+        }
+    } else {
+        echo "error en la query => $query";
     }
 
+    $table = "<table border='1'>$filas</table>";
+    return $table;
 }
-
-
 
 
 ?>
