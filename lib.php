@@ -226,11 +226,34 @@ function getPriv($user){
     $q = "SELECT permiso FROM usuario WHERE nombre = '$user';";
 
     if ($resultado = $conexion -> query($q)) {
+        $conexion -> close();
         return $resultado -> fetch_assoc()['permiso'];
     } else {
+        $conexion -> close();
         return -1;
     }
 }
+
+function genericQuery($query){
+    $conexion = start_conection("localhost","root","","videoclub");
+
+    if($resultado = $conexion -> query($query)){
+        $conexion -> close();
+        return $resultado;
+    } else {
+        $conexion -> close();
+        echo "error en la query => $query";
+    }
+}
+
+function genAlquileres($resultado){
+
+    while ($i = $resultado -> fetch_assoc()) {
+        
+    }
+
+}
+
 
 
 
