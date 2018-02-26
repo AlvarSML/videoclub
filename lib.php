@@ -252,7 +252,7 @@ function genericQuery($query){
 function getAlquileres($usuario){
     $conexion = start_conection("localhost","root","","videoclub");
 
-    $query = "SELECT * FROM prestamo WHERE socio = (SELECT id_usuario FROM usuario WHERE nombre = '$usuario');";
+    $query = "SELECT * FROM prestamo WHERE socio = (SELECT id_usuario FROM usuario WHERE nombre = '$usuario') AND fecha_entrega is NULL;";
 
     $filas = "<tr><th>ID</th><th>Empleado</th><th>Socio</th><th>Fecha</th><th>Duracion</th><th>Fin</th></tr>";
 
@@ -268,6 +268,31 @@ function getAlquileres($usuario){
         echo "error en la query => $query";
     }
 
+    $conexion -> close();
+    $table = "<table border='1'>$filas</table>";
+    return $table;
+}
+
+function getAlquileresTerminados($usuario){
+    $conexion = start_conection("localhost","root","","videoclub");
+
+    $query = "SELECT * FROM prestamo WHERE socio = (SELECT id_usuario FROM usuario WHERE nombre = '$usuario') AND fecha_entrega is not NULL;";
+
+    $filas = "<tr><th>ID</th><th>Empleado</th><th>Socio</th><th>Fecha</th><th>Duracion</th><th>Fin</th></tr>";
+
+    if($res = $conexion -> query($query)){
+        while ($row = $res -> fetch_array(MYSQLI_NUM)) {
+            $filas .= "<tr>";
+            for ($i = 0; $i <= count($row) -1; $i ++) {
+                $filas .= "<td>$row[$i]</td>";
+            }
+            $filas .= "</td>";
+        }
+    } else {
+        echo "error en la query => $query";
+    }
+    
+    $conexion -> close();
     $table = "<table border='1'>$filas</table>";
     return $table;
 }
