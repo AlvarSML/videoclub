@@ -14,13 +14,14 @@ if (isset($_REQUEST['nuevo_usuario'])) {
     $apellidos = $_REQUEST['apellidos'];
 
     $error = nuevoUsuario($nombre, $clave,$apellidos);
-    if($error != " "){
+    if($error == " "){
 
         echo ("Error");
         registro();
     }else{
         echo ("REgistro insertado");
         formularioInicial();
+
     }
 }
 ?>
