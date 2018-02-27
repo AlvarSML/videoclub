@@ -1,14 +1,11 @@
 
 <form action="nuevo.php" method="post">
-<<<<<<< HEAD
- 
-  <input type="submit" name="alquiler" value="Alquiler">
-=======
+
   <?php
     if (getPriv($_SESSION['user']) == 2) { 
   ?>
   <input type="submit" name="disc" value="Gestionar discos">
->>>>>>> 86d465bc47b014d92b5a8dc27e850137491b5260
+
   <input type="submit" name="dvd" value="Gestionar videos">
  
   <?php
