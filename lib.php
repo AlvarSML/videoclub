@@ -8,7 +8,6 @@ function formularioInicial(){
     <input type="text" name="nombre">
     <p>Contraseña: </p>
     <input type="password" name="pass"><br>
-    <input type="checkbox" name="empleado"> Empleado <br>
     <input type="submit" name="intro" value="Intro">
 </form>
 <form action="registro.php">
@@ -16,6 +15,7 @@ function formularioInicial(){
 </form>
 <?php
 }
+
 function registro(){
 ?>
 <form action="registro.php" method="post">
@@ -226,12 +226,76 @@ function getPriv($user){
     $q = "SELECT permiso FROM usuario WHERE nombre = '$user';";
 
     if ($resultado = $conexion -> query($q)) {
+        $conexion -> close();
         return $resultado -> fetch_assoc()['permiso'];
     } else {
+        $conexion -> close();
         return -1;
     }
 }
 
+function genericQuery($query){
+    $conexion = start_conection("localhost","root","","videoclub");
+
+    if($resultado = $conexion -> query($query)){
+        $conexion -> close();
+        return $resultado;
+    } else {
+        $conexion -> close();
+        echo "error en la query => $query";
+    }
+}
+
+/**
+ * 
+ */
+function getAlquileres($usuario){
+    $conexion = start_conection("localhost","root","","videoclub");
+
+    $query = "SELECT * FROM prestamo WHERE socio = (SELECT id_usuario FROM usuario WHERE nombre = '$usuario') AND fecha_entrega is NULL;";
+
+    $filas = "<tr><th>ID</th><th>Empleado</th><th>Socio</th><th>Fecha</th><th>Duracion</th><th>Fin</th></tr>";
+
+    if($res = $conexion -> query($query)){
+        while ($row = $res -> fetch_array(MYSQLI_NUM)) {
+            $filas .= "<tr>";
+            for ($i = 0; $i <= count($row) -1; $i ++) {
+                $filas .= "<td>$row[$i]</td>";
+            }
+            $filas .= "</td>";
+        }
+    } else {
+        echo "error en la query => $query";
+    }
+
+    $conexion -> close();
+    $table = "<table border='1'>$filas</table>";
+    return $table;
+}
+
+function getAlquileresTerminados($usuario){
+    $conexion = start_conection("localhost","root","","videoclub");
+
+    $query = "SELECT * FROM prestamo WHERE socio = (SELECT id_usuario FROM usuario WHERE nombre = '$usuario') AND fecha_entrega is not NULL;";
+
+    $filas = "<tr><th>ID</th><th>Empleado</th><th>Socio</th><th>Fecha</th><th>Duracion</th><th>Fin</th></tr>";
+
+    if($res = $conexion -> query($query)){
+        while ($row = $res -> fetch_array(MYSQLI_NUM)) {
+            $filas .= "<tr>";
+            for ($i = 0; $i <= count($row) -1; $i ++) {
+                $filas .= "<td>$row[$i]</td>";
+            }
+            $filas .= "</td>";
+        }
+    } else {
+        echo "error en la query => $query";
+    }
+    
+    $conexion -> close();
+    $table = "<table border='1'>$filas</table>";
+    return $table;
+}
 
 
 ?>
