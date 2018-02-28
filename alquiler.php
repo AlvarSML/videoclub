@@ -1,4 +1,5 @@
 <?php
+include "lib.php";
 print('<form action="nuevo.php" method="post">');
 $conexion = start_conection("localhost","root","","videoclub");
 print('<h1>SOCIO</h1>');
