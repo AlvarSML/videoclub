@@ -13,7 +13,7 @@ for ($i = 0; $i<$resultado1->num_rows;$i++){
     $sql = "select * from socio where id_usuario=$idUsuario";
     $resultado = $conexion->query($sql);
     $roww = $resultado->fetch_assoc();
-    $idSocio = $roww['id_socio'];
+    $idSocio = $row['id_socio'];
     print('<option value="'.$idSocio.'">'.$nombreSocio.'');
     print('</option>');
 }
