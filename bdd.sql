@@ -64,3 +64,19 @@ CREATE TABLE disco (
 
 INSERT INTO permisos VALUES (0,'socio'),(0,'empleado'),(0,'jefe');
 INSERT INTO usuario VALUES (0,'123','socio','socio',1),(0,'123','empleado','empleado',2);
+INSERT INTO prestamo (id_prestamo, empleado, socio, fecha_inicio, duracion, fecha_entrega) VALUES (NULL, '2', '1', '2018-02-04', '7', NULL);
+INSERT INTO disco (id_disco, id_prestamo, nombre_disco, autor) VALUES (NULL, '1', 'Thriller', 'Michael Jackson');
+INSERT INTO prestamo (id_prestamo, empleado, socio, fecha_inicio, duracion, fecha_entrega) VALUES (NULL, '2', '1', '2018-02-07', '20', NULL);
+INSERT INTO disco (id_disco, id_prestamo, nombre_disco, autor) VALUES (NULL, '2', 'The dark side of the moon', 'Pink Floy');
+INSERT INTO video (id_video, id_prestamo, nombre_video, protagonista) VALUES (NULL, '2', 'Live at Wembley Stadium', 'Queen');
+INSERT INTO video (id_video, id_prestamo, nombre_video, protagonista) VALUES (NULL, '2', 'En la arena', 'Hombre G');
+
+INSERT INTO video (id_video, id_prestamo, nombre_video, protagonista) VALUES (NULL, NULL, 'Uprising Live!', 'Bob Marley');
+INSERT INTO video (id_video, id_prestamo, nombre_video, protagonista) VALUES (NULL, NULL, 'Live at Rockpalast', 'Aswad');
+INSERT INTO video (id_video, id_prestamo, nombre_video, protagonista) VALUES (NULL, NULL, 'Quebec Magnetic', 'Metallica');
+INSERT INTO video (id_video, id_prestamo, nombre_video, protagonista) VALUES (NULL, NULL, 'Yo me veo contigo', 'Melendi ');
+
+INSERT INTO disco (id_disco, id_prestamo, nombre_disco, autor) VALUES (NULL, NULL, 'Back in black', 'AC/DC');
+INSERT INTO disco (id_disco, id_prestamo, nombre_disco, autor) VALUES (NULL, NULL, 'The Greatest hits', 'The Eagles');
+INSERT INTO disco (id_disco, id_prestamo, nombre_disco, autor) VALUES (NULL, NULL, 'Rumours', 'Fleetwood Mac');
+INSERT INTO disco (id_disco, id_prestamo, nombre_disco, autor) VALUES (NULL, NULL, 'Nevermind', 'Nirvana');

@@ -15,7 +15,7 @@
 </form>
 
 <?php
-  if (getPriv($_SESSION['user']) > 2) { 
+  if (getPriv($_SESSION['user']) >= 2) { 
 ?>
 <form action="alquiler.php" method="post">
 <input type="submit" name="alquiler" value="Alquiler">

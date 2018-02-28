@@ -39,15 +39,15 @@ if (isset($_POST['disc']) || isset($_POST['ndisco']) || isset($_POST['deldisc'])
     $idEmpleado = $row['id_usuario'];
     $idSocio = $_POST['socios'];
     $fechaInicio = $_POST['fechini']; 
-    $fechaEntrega = $_POST['fechfin'];
-    $fecha1 = date_create($fechaInicio);
+    $duracion= $_POST['duracion'];
+   /* $fecha1 = date_create($fechaInicio);
     $fecha2 = date_create($fechaEntrega);
     $interval = $fecha1->diff($fecha2);
-    $duracion = $interval->format('%a');
+    $duracion = $interval->format('%a');*/
     $idDisco = $_POST['discos'];
     $idVideo = $_POST['videos'];
 
-    $sql = "insert into prestamo(empleado,socio,fecha_inicio,duracion,fecha_entrega) values($idEmpleado,$idSocio,'$fechaInicio',$duracion,'$fechaEntrega')";
+    $sql = "insert into prestamo(empleado,socio,fecha_inicio,duracion,fecha_entrega) values($idEmpleado,$idSocio,'$fechaInicio',$duracion, null)";
     $resultado = $conexion->query($sql);
     $sql = "SELECT MAX(id_prestamo) from prestamo";
     $resultado = $conexion->query($sql);
@@ -61,7 +61,7 @@ if (isset($_POST['disc']) || isset($_POST['ndisco']) || isset($_POST['deldisc'])
         $sql = "update video set id_prestamo=$idPrestamo where id_video=$idVideo";
         $resultado = $conexion->query($sql);
         echo("El empleado ".$idEmpleado." ha realizado un prestamo al socio ".$idSocio.".<br/>");
-        echo("Las fechas del prestamos son : fecha de incio-> ".$fechaInicio." ,fecha de entrega-> ".$fechaEntrega.".<br/>");
+        echo("Los días del prestamo son: ".$duracion." ,desde la fecha ".$fechaInicio.".<br/>");
         echo("<a href='index.php'>[Volver al menu]</a>");
 
     }
