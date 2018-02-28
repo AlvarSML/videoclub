@@ -1,7 +1,7 @@
 
 <form action="nuevo.php" method="post">
     <?php
-    if (getPriv($_SESSION['user']) == 2) { 
+    if (getPriv($_SESSION['user']) >= 2) { 
     ?>
     <input type="submit" name="disc" value="Gestionar discos">
     <input type="submit" name="dvd" value="Gestionar videos">

@@ -32,10 +32,11 @@ if (isset($_POST['disc']) || isset($_POST['ndisco']) || isset($_POST['deldisc'])
 }else if(isset($_POST['alquilar'])){
     $conexion = start_conection("localhost","root","","videoclub");
     $nombreEmpleado = $_SESSION['user'];
-    $sql2 = "select id_empleado from empleado join usuario on empleado.id_usuario = usuario.id_usuario where usuario.nombre='$nombreEmpleado'";
-    $resultado2 = $conexion->query($sql2);
+    $sql2 = "select id_usuario from usuario where nombre='$nombreEmpleado'";
+
+    $resultado2 = $conexion->query($sql2) or die ($sql2);
     $row = $resultado2->fetch_assoc();
-    $idEmpleado = $row['id_empleado'];
+    $idEmpleado = $row['id_usuario'];
     $idSocio = $_POST['socios'];
     $fechaInicio = $_POST['fechini']; 
     $fechaEntrega = $_POST['fechfin'];
@@ -61,6 +62,7 @@ if (isset($_POST['disc']) || isset($_POST['ndisco']) || isset($_POST['deldisc'])
         $resultado = $conexion->query($sql);
         echo("El empleado ".$idEmpleado." ha realizado un prestamo al socio ".$idSocio.".<br/>");
         echo("Las fechas del prestamos son : fecha de incio-> ".$fechaInicio." ,fecha de entrega-> ".$fechaEntrega.".<br/>");
+        echo("<a href='index.php'>[Volver al menu]</a>");
 
     }
 
