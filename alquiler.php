@@ -13,8 +13,8 @@ for ($i = 0; $i<$resultado1->num_rows;$i++){
     $row = $resultado1->fetch_assoc();
     $idUsuario = $row['id_usuario'];
     $nombreSocio = $row['nombre'];
-
     print('<option value="'.$idUsuario.'">'.$nombreSocio.'');
+
     print('</option>');
 }
 print('</select>');
